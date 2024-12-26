@@ -1,0 +1,27 @@
+from PIL import Image
+import os
+
+def convert_png_to_webp(input_folder, output_folder, size=(1000, 1000)):
+
+    if not os.path.exists(output_folder):
+        os.makedirs(output_folder)
+
+
+    for filename in os.listdir(input_folder):
+        if filename.endswith(".png"):
+      
+            img_path = os.path.join(input_folder, filename)
+            img = Image.open(img_path)
+
+      
+            img = img.resize(size)
+
+            webp_filename = os.path.splitext(filename)[0] + ".webp"
+            img.save(os.path.join(output_folder, webp_filename), format="WEBP")
+            print(f"{filename} convertida a {webp_filename}")
+
+input_folder = r"piquense la cola" #direccion de la carpeta con png 
+output_folder = r"piquense la cola" #dirrecion de la carpeta con la conversion 
+
+
+convert_png_to_webp(input_folder, output_folder)
